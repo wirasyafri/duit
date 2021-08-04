@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Agu 2021 pada 18.09
+-- Waktu pembuatan: 04 Agu 2021 pada 06.09
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 7.3.3
 
@@ -34,16 +34,10 @@ CREATE TABLE `tb_transaksi` (
   `nama_lengkap` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   `nominal` int(11) NOT NULL,
-  `tanggal` date NOT NULL
+  `tanggal` date NOT NULL,
+  `kode` varchar(50) NOT NULL,
+  `bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_transaksi`
---
-
-INSERT INTO `tb_transaksi` (`id`, `nim`, `nama_lengkap`, `alamat`, `nominal`, `tanggal`) VALUES
-(17, '', 'wira', '', 1123123, '2021-01-01'),
-(20, '', 'syafri', '', 123456, '2021-08-12');
 
 --
 -- Indexes for dumped tables
@@ -63,7 +57,7 @@ ALTER TABLE `tb_transaksi`
 -- AUTO_INCREMENT untuk tabel `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

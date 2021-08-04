@@ -25,21 +25,38 @@
              <form action="<?php echo base_url('index.php/transaksi/update/') ?> " method="POST">
 
               <input type="hidden" name="id" value="<?php echo $transaksi->id ?>">
-
+<!-- 
               <div class="form-group">
                 <label>NIM</label>
                 <input type="text" name="nim" value="<?php echo $transaksi->nim ?>" class="form-control">
-              </div>
+              </div> -->
 
               <div class="form-group">
                 <label>NAMA LENGKAP</label>
                 <input type="text" name="nama_lengkap" value="<?php echo $transaksi->nama_lengkap ?>" class="form-control">
               </div>
-
               <div class="form-group">
+                <label>KODE</label>
+                <input type="text" name="kode" value="<?php echo $transaksi->kode ?>" class="form-control">
+              </div>
+            <div class="form-group">
+                <label>NOMINAL</label>
+                <input type="text" name="nominal" value="<?php echo $transaksi->nominal ?>" class="form-control">
+              </div>
+            <div class="form-group">
+                <label>GET</label>
+                <input type="text" name="bayar" value="<?php echo $transaksi->bayar ?>" class="form-control">
+            </div>
+              <div class="form-group">
+                <label>TANGGAL</label>
+                <input type="date" name="tanggal" value="<?php echo $transaksi->tanggal ?>" class="form-control">
+                <!-- <input id="txtDate" type="text" class="form-control" name="tanggal"> -->
+              </div>
+
+<!--               <div class="form-group">
                 <label>ALAMAT</label>
                 <textarea class="form-control" name="alamat" rows="4"><?php echo $transaksi->alamat ?></textarea>
-              </div>
+              </div> -->
               
               <button type="submit" class="btn btn-primary">UPDATE</button>
               <button type="button" id="kembali">Cancel</button>

@@ -26,7 +26,9 @@ class Transaksi extends CI_Controller {
 		$data = array(
 			// 'nim' => $this->input->post('nim'),
 			'nama_lengkap' => $this->input->post('nama_lengkap'),
+			'kode' => $this->input->post('kode'),
 			'nominal' => $this->input->post('nominal'),
+			'bayar' => $this->input->post('bayar'),
 			'tanggal' => date('Y/m/d',strtotime($this->input->post('tanggal'))),
 			// 'alamat' => $this->input->post('alamat')
 		);
@@ -61,9 +63,11 @@ class Transaksi extends CI_Controller {
 		$id['id'] = $this->input->post("id");
 
 		$data = array(
-			'nim' => $this->input->post('nim'),
 			'nama_lengkap' => $this->input->post('nama_lengkap'),
-			'alamat' => $this->input->post('alamat')
+			'kode' => $this->input->post('kode'),
+			'nominal' => $this->input->post('nominal'),
+			'bayar' => $this->input->post('bayar'),
+			'tanggal' => date('Y/m/d',strtotime($this->input->post('tanggal'))),
 		);
 
 		$mhs = $this->M_transaksi->update_transaksi($data, $id);

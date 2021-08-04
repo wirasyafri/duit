@@ -34,7 +34,9 @@
                   <th>No</th>
                   <!-- <th scope="col">NIM</th> -->
                   <th scope="col">NAMA</th>
+                  <th scope="col">KODE</th>
                   <th scope="col">NOMINAL</th>
+                  <th scope="col">GET</th>
                   <th scope="col">TANGGAL</th>
                   <!-- <th scope="col">ALAMAT</th> -->
                   <th scope="col">AKSI</th>
@@ -44,25 +46,34 @@
 
                 <?php
                   $no=1;
-                  foreach($transaksi->result() as $mhs){?>
+                  foreach($transaksi->result() as $trs){?>
 
                 <tr>
                   <td><?php echo $no++; ?></td>
-                  <!-- <td><?php echo $mhs->nim; ?></td> -->
-                  <td><?php echo $mhs->nama_lengkap; ?></td>
-                  <td><?php echo $mhs->nominal; ?></td>
-                  <td><?php echo date('d/m/Y',strtotime($mhs->tanggal)); ?></td>
-                  <!-- <td><?php echo $mhs->alamat; ?></td> -->
+                  <!-- <td><?php echo $trs->nim; ?></td> -->
+                  <td><?php echo $trs->nama_lengkap; ?></td>
+                  <td><?php echo $trs->kode; ?></td>
+                  <td><?php echo $trs->nominal; ?></td>
+                  <td><?php echo $trs->bayar; ?></td>
+                  <td><?php echo date('d/m/Y',strtotime($trs->tanggal)); ?></td>
+                  <!-- <td><?php echo $trs->alamat; ?></td> -->
                   <td class="text-center">
-                    <a href="<?php echo base_url()?>index.php/transaksi/edit/<?php echo $mhs->id; ?>" class="btn btn-sm btn-primary">EDIT</a>                    
+                    <a href="<?php echo base_url()?>index.php/transaksi/edit/<?php echo $trs->id; ?>" class="btn btn-sm btn-primary">EDIT</a>                    
 
-                    <a href="<?php echo base_url()?>index.php/transaksi/hapus/<?php echo $mhs->id; ?>" class="btn btn-sm btn-danger">HAPUS</a>
+                    <a href="<?php echo base_url()?>index.php/transaksi/hapus/<?php echo $trs->id; ?>" class="btn btn-sm btn-danger">HAPUS</a>
 
 
                   </td>
                 </tr>
              <?php } ?>
               </tbody>
+              <tfoot>
+            <tr>
+                <th colspan="3" style="text-align:right">Total:</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
             </table>  
              
 
@@ -81,8 +92,58 @@
     <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready( function () {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable( {
+        "footerCallback": function ( row, data, start, end, display ) {
+                                                                           // console.log(data)
+            var api = this.api(), data;
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // // Total over all pages
+            // total = api
+            //     .column( 2 )
+            //     .data()
+            //     .reduce( function (a, b) {
+            //         return intVal(a) + intVal(b);
+            //     }, 0 );
+ 
+            // Total over this page
+            tot_nominal = api
+                .column( 3, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+            tot_bayar = api
+                .column( 4, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+            console.log(tot_nominal)
+            // // Update footer
+            $( api.column( 3 ).footer() ).html(
+                'Rp.'+tot_nominal
+            );
+            $( api.column( 4 ).footer() ).html(
+                'Rp.'+tot_bayar
+            );
+        }
+    } );
         } );
+
+        // var table = $('#myTable').DataTable();
+ 
+        // table.on( 'search.dt', function () {
+        //                                         alert("hehe")
+        //     // $('#filterInfo').html( 'Currently applied global search: '+table.search() );
+        // } );
     </script>
   </body>
 </html>

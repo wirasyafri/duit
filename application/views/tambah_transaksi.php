@@ -33,8 +33,16 @@
                 <input type="text" name="nama_lengkap" class="form-control">
               </div>
               <div class="form-group">
+                <label>KODE</label>
+                <input type="text" name="kode" class="form-control">
+              </div>
+              <div class="form-group">
                 <label>NOMINAL</label>
                 <input type="text" name="nominal" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>GET</label>
+                <input type="text" name="bayar" class="form-control">
               </div>
               <div class="form-group">
                 <label>TANGGAL</label>
