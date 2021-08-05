@@ -31,15 +31,15 @@
 
               <thead>
                 <tr>
-                  <th>No</th>
+                  <td>No</th>
                   <!-- <th scope="col">NIM</th> -->
                   <th scope="col">NAMA</th>
-                  <th scope="col">KODE</th>
-                  <th scope="col">NOMINAL</th>
-                  <th scope="col">GET</th>
+                  <td scope="col">KODE</th>
+                  <td scope="col">NOMINAL</th>
+                  <td scope="col">GET</th>
                   <th scope="col">TANGGAL</th>
                   <!-- <th scope="col">ALAMAT</th> -->
-                  <th scope="col">AKSI</th>
+                  <td scope="col">AKSI</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,7 +67,7 @@
                 </tr>
              <?php } ?>
               </tbody>
-              <tfoot>
+        <tfoot>
             <tr>
                 <th colspan="3" style="text-align:right">Total:</th>
                 <th></th>
@@ -92,29 +92,74 @@
     <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready( function () {
-            $('#myTable').DataTable( {
-        "footerCallback": function ( row, data, start, end, display ) {
-                                                                           // console.log(data)
-            var api = this.api(), data;
+    //         $('#myTable').DataTable( {
+    //     "footerCallback": function ( row, data, start, end, display ) {
+    //                                                                        // console.log(data)
+    //         var api = this.api(), data;
  
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
+    //         // Remove the formatting to get integer data for summation
+    //         var intVal = function ( i ) {
+    //             return typeof i === 'string' ?
+    //                 i.replace(/[\$,]/g, '')*1 :
+    //                 typeof i === 'number' ?
+    //                     i : 0;
+    //         };
+ 
+    //         // // Total over all pages
+    //         // total = api
+    //         //     .column( 2 )
+    //         //     .data()
+    //         //     .reduce( function (a, b) {
+    //         //         return intVal(a) + intVal(b);
+    //         //     }, 0 );
+ 
+    //         // Total over this page
+    //         tot_nominal = api
+    //             .column( 3, { page: 'current'} )
+    //             .data()
+    //             .reduce( function (a, b) {
+    //                 return intVal(a) + intVal(b);
+    //             }, 0 );
+    //         tot_bayar = api
+    //             .column( 4, { page: 'current'} )
+    //             .data()
+    //             .reduce( function (a, b) {
+    //                 return intVal(a) + intVal(b);
+    //             }, 0 );
+    //         console.log(tot_nominal)
+    //         // // Update footer
+    //         $( api.column( 3 ).footer() ).html(
+    //             'Rp.'+tot_nominal
+    //         );
+    //         $( api.column( 4 ).footer() ).html(
+    //             'Rp.'+tot_bayar
+    //         );
+    //     }
+    // } );
+
+        } );
+$('#myTable thead th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+
+        var table = $('#myTable').DataTable({
+                                                 "footerCallback": function ( row, data, start, end, display ) {
+ var api = this.api(), data;
+                var intVal = function ( i ) {
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
                     typeof i === 'number' ?
                         i : 0;
             };
- 
-            // // Total over all pages
-            // total = api
-            //     .column( 2 )
-            //     .data()
-            //     .reduce( function (a, b) {
-            //         return intVal(a) + intVal(b);
-            //     }, 0 );
- 
-            // Total over this page
-            tot_nominal = api
+                       total = api
+                .column( 2 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+
+                        tot_nominal = api
                 .column( 3, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
@@ -126,7 +171,7 @@
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            console.log(tot_nominal)
+                console.log(tot_nominal)
             // // Update footer
             $( api.column( 3 ).footer() ).html(
                 'Rp.'+tot_nominal
@@ -134,10 +179,23 @@
             $( api.column( 4 ).footer() ).html(
                 'Rp.'+tot_bayar
             );
+ 
+                                                },
+        initComplete: function () {
+            // Apply the search
+            this.api().columns().every( function () {
+                var that = this;
+ 
+                $( 'input', this.header() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         }
-    } );
-        } );
-
+    });
         // var table = $('#myTable').DataTable();
  
         // table.on( 'search.dt', function () {
