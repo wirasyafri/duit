@@ -41,11 +41,11 @@
               </div>
             <div class="form-group">
                 <label>NOMINAL</label>
-                <input type="text" name="nominal" value="<?php echo $transaksi->nominal ?>" class="form-control">
+                <input type="text" name="nominal" value="<?php echo $transaksi->nominal ?>" class="form-control tanpa-rupiah">
               </div>
             <div class="form-group">
                 <label>GET</label>
-                <input type="text" name="bayar" value="<?php echo $transaksi->bayar ?>" class="form-control">
+                <input type="text" name="bayar" value="<?php echo $transaksi->bayar ?>" class="form-control tanpa-rupiah">
             </div>
               <div class="form-group">
                 <label>TANGGAL</label>
@@ -84,5 +84,7 @@
         }
 
     </script>
+    <?php $this->load->view('js/accounting_js') ?>
+
   </body>
 </html>

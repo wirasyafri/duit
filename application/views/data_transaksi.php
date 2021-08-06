@@ -138,14 +138,14 @@
     // } );
 
         } );
-$('#myTable thead th').each( function () {
+    $('#myTable thead th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
     } );
 
-        var table = $('#myTable').DataTable({
-                                                 "footerCallback": function ( row, data, start, end, display ) {
- var api = this.api(), data;
+    var table = $('#myTable').DataTable({
+        "footerCallback": function ( row, data, start, end, display ) {
+        var api = this.api(), data;
                 var intVal = function ( i ) {
                 return typeof i === 'string' ?
                     i.replace(/[\$,]/g, '')*1 :
@@ -174,10 +174,10 @@ $('#myTable thead th').each( function () {
                 console.log(tot_nominal)
             // // Update footer
             $( api.column( 3 ).footer() ).html(
-                'Rp.'+tot_nominal
+                'Rp.'+numberWithCommas(tot_nominal)
             );
             $( api.column( 4 ).footer() ).html(
-                'Rp.'+tot_bayar
+                'Rp.'+numberWithCommas(tot_bayar)
             );
  
                                                 },
@@ -196,6 +196,12 @@ $('#myTable thead th').each( function () {
             } );
         }
     });
+
+    function numberWithCommas(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        return parts.join(".");
+    }
         // var table = $('#myTable').DataTable();
  
         // table.on( 'search.dt', function () {

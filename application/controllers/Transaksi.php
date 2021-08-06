@@ -27,8 +27,8 @@ class Transaksi extends CI_Controller {
 			// 'nim' => $this->input->post('nim'),
 			'nama_lengkap' => $this->input->post('nama_lengkap'),
 			'kode' => $this->input->post('kode'),
-			'nominal' => $this->input->post('nominal'),
-			'bayar' => $this->input->post('bayar'),
+			'nominal' => str_replace('.','',$this->input->post('nominal')),
+			'bayar' => str_replace('.','',$this->input->post('bayar')),
 			'tanggal' => date('Y/m/d',strtotime($this->input->post('tanggal'))),
 			// 'alamat' => $this->input->post('alamat')
 		);
@@ -65,10 +65,11 @@ class Transaksi extends CI_Controller {
 		$data = array(
 			'nama_lengkap' => $this->input->post('nama_lengkap'),
 			'kode' => $this->input->post('kode'),
-			'nominal' => $this->input->post('nominal'),
-			'bayar' => $this->input->post('bayar'),
+			'nominal' => str_replace('.','',$this->input->post('nominal')),
+			'bayar' => str_replace('.','',$this->input->post('bayar')),
 			'tanggal' => date('Y/m/d',strtotime($this->input->post('tanggal'))),
 		);
+		// print_r($data);
 
 		$mhs = $this->M_transaksi->update_transaksi($data, $id);
 
