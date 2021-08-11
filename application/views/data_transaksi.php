@@ -194,7 +194,18 @@
                     }
                 } );
             } );
-        }
+        },
+        columnDefs:
+            [
+                {
+                    targets: 3,
+                    render: $.fn.dataTable.render.number('.', ',', 0, '')
+                },
+                {
+                    targets: 4,
+                    render: $.fn.dataTable.render.number('.', ',', 0, '')
+                }
+            ],
     });
 
     function numberWithCommas(x) {
