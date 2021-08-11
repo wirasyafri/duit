@@ -52,6 +52,10 @@
                 <input type="date" name="tanggal" value="<?php echo $transaksi->tanggal ?>" class="form-control">
                 <!-- <input id="txtDate" type="text" class="form-control" name="tanggal"> -->
               </div>
+              <div class="form-group">
+                <label>KETERANGAN</label>
+                <input type="text" name="keterangan" value="<?php echo $transaksi->keterangan ?>" class="form-control">
+              </div>
 
 <!--               <div class="form-group">
                 <label>ALAMAT</label>

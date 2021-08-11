@@ -12,76 +12,76 @@
 
     <title>Data Transaksi</title>
   </head>
-  <body>
-    
-    <div class="container" style="margin-top: 80px;">
-      
-      <div class="row">
-        <div class="col-md-10 offset-md-2">
+    <body>
+        <div class="container" style="margin-top: 80px;">
+            <div class="row">
+                <div >
+                  <div class="card">
+                    <div class="card-header">
+                      DATA TRANSAKSI
+                    </div>
+                    <div class="card-body">
 
-          <div class="card">
-            <div class="card-header">
-              DATA TRANSAKSI
+                      <a href="<?php echo base_url()?>index.php/transaksi/tambah/" class="btn btn-primary mb-3">+ Tambah</a>
+
+                    <table class="table table-striped" id="myTable">
+
+                      <thead>
+                        <tr>
+                          <td>No</th>
+                          <!-- <th scope="col">NIM</th> -->
+                          <th scope="col">NAMA</th>
+                          <th scope="col">KODE</th>
+                          <td scope="col">NOMINAL</td>
+                          <td scope="col">GET</td>
+                          <th scope="col">TANGGAL</th>
+                          <td scope="col">KETERANGAN</td>
+                          <!-- <th scope="col">ALAMAT</th> -->
+                          <td scope="col">AKSI</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <?php
+                          $no=1;
+                          foreach($transaksi->result() as $trs){?>
+
+                        <tr>
+                          <td><?php echo $no++; ?></td>
+                          <!-- <td><?php echo $trs->nim; ?></td> -->
+                          <td><?php echo $trs->nama_lengkap; ?></td>
+                          <td><?php echo $trs->kode; ?></td>
+                          <td><?php echo $trs->nominal; ?></td>
+                          <td><?php echo $trs->bayar; ?></td>
+                          <td><?php echo date('d/m/Y',strtotime($trs->tanggal)); ?></td>
+                          <td><?php echo $trs->keterangan; ?></td>
+                          <!-- <td><?php echo $trs->alamat; ?></td> -->
+                          <td class="text-center">
+                            <a href="<?php echo base_url()?>index.php/transaksi/edit/<?php echo $trs->id; ?>" class="btn btn-sm btn-primary">EDIT</a>                    
+
+                            <a href="<?php echo base_url()?>index.php/transaksi/hapus/<?php echo $trs->id; ?>" class="btn btn-sm btn-danger">HAPUS</a>
+
+
+                          </td>
+                        </tr>
+                     <?php } ?>
+                      </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3" style="text-align:right">Total:</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>  
+                     
+
+                    </div>
+                  </div>
+                </div>
             </div>
-            <div class="card-body">
-
-              <a href="<?php echo base_url()?>index.php/transaksi/tambah/" class="btn btn-primary mb-3">+ Tambah</a>
-
-            <table class="table table-striped" id="myTable">
-
-              <thead>
-                <tr>
-                  <td>No</th>
-                  <!-- <th scope="col">NIM</th> -->
-                  <th scope="col">NAMA</th>
-                  <td scope="col">KODE</th>
-                  <td scope="col">NOMINAL</th>
-                  <td scope="col">GET</th>
-                  <th scope="col">TANGGAL</th>
-                  <!-- <th scope="col">ALAMAT</th> -->
-                  <td scope="col">AKSI</th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <?php
-                  $no=1;
-                  foreach($transaksi->result() as $trs){?>
-
-                <tr>
-                  <td><?php echo $no++; ?></td>
-                  <!-- <td><?php echo $trs->nim; ?></td> -->
-                  <td><?php echo $trs->nama_lengkap; ?></td>
-                  <td><?php echo $trs->kode; ?></td>
-                  <td><?php echo $trs->nominal; ?></td>
-                  <td><?php echo $trs->bayar; ?></td>
-                  <td><?php echo date('d/m/Y',strtotime($trs->tanggal)); ?></td>
-                  <!-- <td><?php echo $trs->alamat; ?></td> -->
-                  <td class="text-center">
-                    <a href="<?php echo base_url()?>index.php/transaksi/edit/<?php echo $trs->id; ?>" class="btn btn-sm btn-primary">EDIT</a>                    
-
-                    <a href="<?php echo base_url()?>index.php/transaksi/hapus/<?php echo $trs->id; ?>" class="btn btn-sm btn-danger">HAPUS</a>
-
-
-                  </td>
-                </tr>
-             <?php } ?>
-              </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="3" style="text-align:right">Total:</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </tfoot>
-            </table>  
-             
-
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </body>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

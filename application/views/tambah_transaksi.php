@@ -49,6 +49,10 @@
                 <input type="date" name="tanggal" class="form-control">
                 <!-- <input id="txtDate" type="text" class="form-control" name="tanggal"> -->
               </div>
+              <div class="form-group">
+                <label>KETERANGAN</label>
+                <input type="text" name="keterangan" class="form-control">
+              </div>
 <!-- 
               <div class="form-group">
                 <label>ALAMAT</label>

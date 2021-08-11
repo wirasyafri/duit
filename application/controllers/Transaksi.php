@@ -30,6 +30,7 @@ class Transaksi extends CI_Controller {
 			'nominal' => str_replace('.','',$this->input->post('nominal')),
 			'bayar' => str_replace('.','',$this->input->post('bayar')),
 			'tanggal' => date('Y/m/d',strtotime($this->input->post('tanggal'))),
+			'keterangan' => $this->input->post('keterangan'),
 			// 'alamat' => $this->input->post('alamat')
 		);
 
@@ -68,6 +69,7 @@ class Transaksi extends CI_Controller {
 			'nominal' => str_replace('.','',$this->input->post('nominal')),
 			'bayar' => str_replace('.','',$this->input->post('bayar')),
 			'tanggal' => date('Y/m/d',strtotime($this->input->post('tanggal'))),
+			'keterangan' => $this->input->post('keterangan'),
 		);
 		// print_r($data);
 
