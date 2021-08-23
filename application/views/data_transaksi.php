@@ -140,6 +140,7 @@
     } );
 
     var table = $('#myTable').DataTable({
+        stateSave: true,
         "footerCallback": function ( row, data, start, end, display ) {
         var api = this.api(), data;
                 var intVal = function ( i ) {
@@ -208,6 +209,19 @@
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         return parts.join(".");
     }
+
+    var state = table.state.loaded();
+    console.log(state)
+        if ( state ) {
+        $dataTable.columns().eq( 0 ).each( function ( colIdx ) {
+        var colSearch = state.columns[colIdx].search;
+
+   if ( colSearch.search ) {
+     $('input', $('.thead th')[colIdx]).val( colSearch.search );
+   }
+  });
+  $dataTable.draw();
+ }
         // var table = $('#myTable').DataTable();
  
         // table.on( 'search.dt', function () {
